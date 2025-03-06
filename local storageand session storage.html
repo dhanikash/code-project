@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onSubmit="handleSubmit(event)">
+    <div class="">
+        <label for="name">name:</label>
+        <input type="text" id="name" placeholder="enter your name">
+
+    </div>
+    <div class="">
+        <label for="age">age:</label>
+        <input type="age" id="age" placeholder="enter your age">
+        
+    </div>
+    <div class="">
+        <label for="dateofbirth">dateofbirth:</label>
+        <input type="dateofbirth" id="dateofbirth" placeholder="enter your dateofbirth">
+        
+    </div>
+    <div class="">
+        <label for="phoneNumber">phonenumber:</label>
+        <input type="phoneNumber" id="phoneNumber" placeholder="enter your phoneNumber">
+        
+    </div>
+    <div class="">
+        <label for="email">email:</label>
+        <input type="email" id="email" placeholder="enter your email">
+        
+    </div>
+  
+       
+        <div class="">
+            <label for="gender">Gender:</label>
+            <select id="gender">
+                <option value="">Gender</option>
+                <option value="male">male</option>
+                <option value="female">female</option>
+
+            </select>
+            </div>
+           <button type="Submit">Submit</button>
+        </form>
+        <button onclick="getData()">Get data
+        </button>
+        <script>
+            const handleSubmit = (e)=> {
+                e.preventDefault();
+                let nameInput= document.getElementById("name");
+                let ageInput= document.getElementById("age");
+                let emailInput= document.getElementById("email");
+                let dateofbirthInput= document.getElementById("dateofbirth");
+                let phoneNumberInput= document.getElementById("phoneNumber");
+                let genderInput = document.getElementById("gender");
+
+
+                let name = nameInput.value.trim();
+                let age = ageInput.value.trim();
+                let email = emailInput.value.trim();
+                let dateofbirth = dateofbirthInput.value.trim();
+                let phoneNumber = phoneNumberInput.value.trim();
+                let gender = genderInput.value.trim();
+
+                
+
+                let user = {
+                name,
+                age,
+                email,
+                dateofbirth,
+                phoneNumber,
+                gender,
+            };
+            console.log("User Object:", user);
+
+let jsonObject = JSON.stringify(user);
+console.log("JSON Object:", jsonObject);
+
+localStorage.setItem("user", jsonObject);
+sessionStorage.setItem("user", jsonObject);
+
+            // Clear form inputs
+            nameInput.value = "";
+            ageInput.value = "";
+            emailInput.value = "";
+            dateofbirth.value = "";
+            phoneNumberInput.value = "";
+            genderInput.value = "";
+
+        };
+        
+
+        function getData() {
+            let storedData = localStorage.getItem("user");
+            if (storedData) {
+                console.log("Parsed Data:", JSON.parse(storedData));
+            } else {
+                console.log("No data found in localStorage.");
+            }
+        }
+
+        </script>
+</body>
+</html>

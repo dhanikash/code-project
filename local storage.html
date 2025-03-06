@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission</title>
+</head>
+<body>
+    <form onsubmit="handleSubmit(event)">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name" >
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email" >
+        </div>
+        <div>
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" placeholder="Enter your phone number" >
+        </div>
+        <div>
+            <label for="gender">Gender:</label>
+            <select id="gender" >
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+
+    <button onclick="getData()">Get Data</button>
+
+    <script>
+        const handleSubmit = (e) => {
+            e.preventDefault();
+
+            let NameInput = document.getElementById("name");
+            let EmailInput = document.getElementById("email");
+            let PhoneNumberInput = document.getElementById("phoneNumber");
+            let GenderInput = document.getElementById("gender");
+
+            let name = NameInput.value.trim();
+            let email = EmailInput.value.trim();
+            let phoneNumber = PhoneNumberInput.value.trim();
+            let gender = GenderInput.value.trim();
+
+
+            let user = {
+                name,
+                email,
+                phoneNumber,
+                gender,
+            };
+            console.log("User Object:", user);
+
+            let jsonObject = JSON.stringify(user);
+            console.log("JSON Object:", jsonObject);
+
+            localStorage.setItem("user", jsonObject);
+            sessionStorage.setItem("user", jsonObject);
+
+            // Clear form inputs
+            NameInput.value = "";
+            EmailInput.value = "";
+            PhoneNumberInput.value = "";
+            GenderInput.value = "";
+        };
+
+        function getData() {
+            let storedData = localStorage.getItem("user");
+            if (storedData) {
+                console.log("Parsed Data:", JSON.parse(storedData));
+            } else {
+                console.log("No data found in localStorage.");
+            }
+        }
+    </script>
+</body>
+</html>
