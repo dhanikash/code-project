@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        height: 80vh;
+        width:100%;
+        background-color: white;
+        align-items: center;
+    }
+
+    .section1{
+        display: flex;
+        flex-direction: column;
+        gap:25px;
+        height: 300px;
+        width:250px;
+        padding: 26px;
+        border: 2px solid rgb(49, 49, 167);
+        border-radius: 20px;
+        box-shadow: 6px 0px 0px 0px  rgb(163, 163, 240);
+    }
+
+   .section2{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+   }
+   label{
+    font-weight: bold;
+   }
+   input{
+        padding: 15px;
+        border: 2px solid #d1caca;
+        border-radius: 6px;
+   }
+   
+   input:focus{
+            outline: none;
+        }
+    .section3{
+          display: flex;
+          justify-content: center;
+           padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #caccce;
+            color: #e6e3e3;
+            cursor: pointer;
+        }
+</style>
+<body>
+    <section class="section1">
+        <div class="section2">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" oninput="validateUser()">
+            <p id="error_name"></p>
+        </div>
+        <div class="section2">
+            <label for="password">password</label>
+            <input type="password" id="password">
+        </div>
+        <div class="section3">
+            <button type="submit">Submit</button>
+        </div>
+    </section>
+</body>
+<script>
+        var Name = document.getElementById("name");
+        var password = document.getElementById("password");
+        let error_name = document.getElementById("error_name")
+
+        let letterPattern=/[a-z]/;
+        let numberPattern=/[0-9]/;
+        let specicalcharacterpattern=/[$^%&@#&*():<>]/;
+        let Nota_b_orc=/[^abc]/;
+
+        function validateUser(){
+            let checkName=Name.value;
+            let checkpassword=password.value;
+
+            if(!checkName){
+                error_name.innerText="name required";
+            }else if(checkName.length<4){
+                error_name.innerText="name is short";
+            }else if(!letterPattern.test(checkName)){
+                error_name.innerText="Name must contain three lowercase letter";
+            }else if(!numberPattern.test(checkName)){
+                error_name.innerText="Name must contain two number";
+            }else if(!specicalcharacterpattern.test(checkName)){
+                error_name.innerText="$^%&@#&*():<> atleast one special character";
+            }else if(!Nota_b_orc.test(checkName)){
+                error_name.innerText="^abc";
+            }else{
+                error_name.innerText="valid";
+            }
+           
+            
+        }
+</script>

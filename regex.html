@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 80vh;
+            background-color: #f2f2f2;
+        }
+        section{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 10px;
+            box-shadow: 10px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        div{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        label{
+            font-weight: bold;
+        }
+
+        input{
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input:focus{
+            outline: none;
+        }
+
+        button{
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <section >
+        <div class="">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" oninput="validateUser()">
+            <p id="error_name"></p>
+        </div>
+        <div class="">
+            <label for="password">password</label>
+            <input type="password" id="password">
+        </div>
+        <div class="">
+            <button type="submit">Submit</button>
+        </div>
+    </section>
+    <script>
+        var Name = document.getElementById("name");
+        var Password = document.getElementById("password");
+        let error_name=document.getElementById("error_name")
+
+        let letterPattern=/[A-Z]/;
+        let numberPattern=/[0-9]/;
+        let specicalcharacterpattern=/[>:"!@#$%^&*()]/;
+
+        function validateUser(){
+            
+            let checkName=Name.value;
+            let checkPass =Password.value;
+ 
+            if(!checkName){
+                error_name.innerText="name required";
+            }else if(checkName.length<6){
+                error_name.innerText="name is short";
+            }else if(!letterPattern.test(checkName)){
+                error_name.innerText="Name must contain one uppercase"
+            }else if(!numberPattern.test(checkName)){
+                error_name.innerText="Name must contain one number"
+            }else if(!specicalcharacterpattern.test(checkName)){
+                error_name.innerText="!@#$%^&*() atleast one special charector"
+            }
+            
+            else{
+                error_name.innerText="name valid"
+            }
+        }
+    </script>
+</body>
+</html>
